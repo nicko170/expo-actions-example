@@ -51,3 +51,14 @@ jobs:
       - run: expo prebuild
       - run: mkdir -p ios/fastlane
       - run: cp -r fastlane/ios/* ios/fastlane
+
+      - name: Deploy iOS Beta to TestFlight via Fastlane
+        uses: maierj/fastlane-action@v2.0.1
+        with:
+          lane: closed_beta
+          subdirectory: ios
+        env:
+          MATCH_PASSWORD: '${{ secrets.MATCH_PASSWORD }}'
+          APPLE_KEY_ID: '${{ secrets.APPLE_KEY_ID }}'
+          APPLE_ISSUER_ID: '${{ secrets.APPLE_ISSUER_ID }}'
+          APPLE_KEY_CONTENT: '${{ secrets.APPLE_KEY_CONTENT }}'
