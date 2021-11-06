@@ -58,7 +58,7 @@ platform :ios do
     gym(
       configuration: "Release",
       workspace: "#{APP_NAME}.xcworkspace",
-      scheme: "#{APP_NAME},
+      scheme: "#{APP_NAME}",
       export_method: "app-store",
       export_options: {
         provisioningProfiles: {
