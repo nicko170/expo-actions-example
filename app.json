@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "expo-actions-builder",
+    "slug": "expo-actions-builder",
+    "version": "1.0.0",
+    "sdkVersion": "43.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "android": {
+      "package": "io.devlan.expo_actions_builder"
+    },
+    "ios": {
+      "bundleIdentifier": "io.devlan.expo-actions-builder"
+    }
+  }
+}

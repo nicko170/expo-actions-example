@@ -1,0 +1,53 @@
+name: iOS Test and Release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  ios_deploy:
+    name: Build and Release iOS App
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'yarn'
+
+      - run: npm install -g expo-cli
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            yarn-
+
+      - name: Install JS Deps
+        run: yarn
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7'
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.FASTLANE_MATCH_KEY }}
+          known_hosts: 'not-used-but-required'
+          if_key_exists: replace
+
+      - run: expo prebuild
+      - run: mkdir -p ios/fastlane
+      - run: cp -r fastlane/ios/* ios/fastlane

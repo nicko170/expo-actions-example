@@ -1,0 +1,8 @@
+app_identifier("io.devlan.expo-actions-builder") # The bundle identifier of your app
+apple_id("nick@npratley.net") # Your Apple email address
+
+itc_team_id("593977") # App Store Connect Team ID
+team_id("W62CSN3S5H") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
